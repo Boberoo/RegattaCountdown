@@ -6,11 +6,10 @@
 <body>
   <button onclick="notify()">Test</button>
 </body>
-                 
 <script>
-navigator.serviceWorker.register('sw.js');
+  navigator.serviceWorker.register('sw.js');
 
-function notify() {
+  function notify() {
 
     Notification.requestPermission(function(result) {
 
@@ -25,6 +24,6 @@ function notify() {
             });
         }
     });
-}
+  }
 </script>
 </html>
