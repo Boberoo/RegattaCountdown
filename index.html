@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
   <title>Notify Test</title>
-</head>
-<body>
-  <button onclick="notify()">Test</button>
-</body>
-<script>
+  <script>
   navigator.serviceWorker.register('sw.js');
 
   function notify() {
@@ -26,4 +22,8 @@
     });
   }
 </script>
+</head>
+<body>
+  <button onclick="notify()">Test</button>
+</body>
 </html>
