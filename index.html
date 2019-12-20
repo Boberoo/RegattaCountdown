@@ -25,6 +25,7 @@
  function doUpdate() {
    var x = document.getElementById("Status");
    x.innerHTML = "Test";
+   requestAnimationFrame(doUpdate);
  }
     
   requestAnimationFrame(doUpdate);
