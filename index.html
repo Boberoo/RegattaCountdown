@@ -21,10 +21,18 @@
         }
     });
   }
+    
+ function doUpdate() {
+   var x = document.getElementById("Status");
+   x.value = "Test";
+ }
+    
+  requestAnimationFrame(doUpdate);
 </script>
 </head>
 <body>
   <input id="raceStart" value="17:30:00" type="time">
+  <label id="Status">Countdown..</label>
   <button onclick="notify()">Test</button>
 </body>
 </html>
