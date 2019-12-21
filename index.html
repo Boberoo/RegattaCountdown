@@ -142,7 +142,7 @@
        var secsTillStart = (startDateTime.getTime() - n.getTime())/1000;
   
       //statusLabel.innerHTML = formatMins(secsTillStart / 60);
-      statusLabel.innerHTML = secsTillStart;
+      statusLabel.innerHTML = secsTillStart+'<br/>'+formatMins(secsTillStart / 60);
 
       if (finalCountDown == null) {
         if ((secsTillStart > 0) && (secsTillStart <= 65)) {
