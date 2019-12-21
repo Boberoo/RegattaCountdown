@@ -89,8 +89,9 @@
       if (secs > 9)
         result += ":"+secs;     
       else if (secs > 0)
-      // result += secs+" seconds"; 
          result += ":0"+secs; 
+       else 
+         result += ":00";    
       return result;
      }
   
@@ -109,18 +110,21 @@
       var n = new Date();
       statusLabel.innerHTML = "Loading..";
       
-       var secsTillStart = dateToSeconds(startDateTime) - dateToSeconds(n);
+       //var secsTillStart = dateToSeconds(startDateTime) - dateToSeconds(n);
+       var secsTillStart = (startDateTime.getTime() - n.getTime())/1000;
   
-      statusLabel.innerHTML = formatMins(secsTillStart / 60);
+      //statusLabel.innerHTML = formatMins(secsTillStart / 60);
+      statusLabel.innerHTML = secsTillStart;
 
       if (finalCountDown == null){
-        if (secsTillStart <= 11) {
+        if ((secsTillStart > 0) && (secsTillStart <= 11)) {
+          console.log(secsTillStart);
+          secondsLeft = Math.trunc(secsTillStart);
           finalCountDown = setInterval(notify, 1000);
-          secondsLeft = 10;
         }
       } else {
         if (secsTillStart < 0) {
-          clearTimeout(finalCountDown);
+          clearInterval(finalCountDown);
           finalCountDown = null;
         }
       }
