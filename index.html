@@ -33,7 +33,7 @@
     }
   
     function notify() {
-      
+      //Note: needs to be run on HTTPS, won't run on anything else
       beep();
       secondsLeft--;
 
@@ -64,7 +64,10 @@
                   registration.showNotification(title, {
                       body: body,
                       icon: icon,
-                  });
+                  }).then(notificationEvent => {
+       let notification = notificationEvent.notification;
+       setTimeout(() => notification.close(), 10*1000); //auto-hide after 10 seconds
+    });
   
               });
           }
