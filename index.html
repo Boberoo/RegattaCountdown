@@ -15,14 +15,16 @@
     <h1 class="display-4">Countdown</h1>
     <p class="lead">Check the start time, you will be alerted at 5 minutes, 4 minutes, 1 minutes, 30 seconds, 15 seconds, then every 10 seconds for the last 10.</p>
     <hr class="my-4">
-    <p>If you have a smart-watch linked to your phone, opening this page using your phone will send notifications to your watch.</p>
+    
   <label>Race Starts at:</label>
   <input class="form-control" id="startDate" type="date">
   <input class="form-control" id="startTime" value="17:30:00" type="time">
   <h1><label class="timer" id="Status">Countdown..</label></h1>
   <button type="button" class="btn btn-success" onclick="test()">Test Notifications</button>
   </div>
-  <footer><div>Under construction</div><div>Test notifications before the race, you may need to click Allow!</div>
+  <footer><div>Under construction</div>
+    <p>Test notifications before the race, you may need to click Allow!</p>
+    <p>If you have a smart-watch linked to your phone, opening this page using your phone will send notifications to your watch.</p>
     <div>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></footer>
   <script>
     navigator.serviceWorker.register('sw.js');
@@ -46,7 +48,7 @@
   
     function notify() {
       //Note: needs to be run on HTTPS, won't run on anything else
-      console.log(secondsLeft);
+      //console.log(secondsLeft);
       secondsLeft--;
       
       var title = secondsLeft+' S';
