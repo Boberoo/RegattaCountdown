@@ -10,7 +10,7 @@
   <input id="startTime" value="17:30:00" type="time">
   <h1><label class="timer" id="Status">Countdown..</label></h1>
   <button onclick="notify()">Test Notifications</button>
-  <footer><div>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></footer>
+  <footer><div>Under construction</div><div>Test notifications before the race, you may need to click Allow!</div>Test <div>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></footer>
   <script>
     navigator.serviceWorker.register('sw.js');
     var finalCountDown = null;
@@ -32,16 +32,34 @@
     }
   
     function notify() {
+      
       beep();
       secondsLeft--;
+
+      if (secondsLeft == 0)
+      {
+        beep();
+        beep();
+      }
+
+      if (secondsLeft < 0)
+      {
+        return;
+      }
 
       Notification.requestPermission(function(result) {
   
           if (result === 'granted') {
              navigator.serviceWorker.ready.then(function(registration) {
-                  var title = secondsLeft+' S';
-                  var body = title+'econds to go';
-                  var icon = 'Images/times.png';
+                  if (secondsLeft == 0) {
+                    var title = 'Go!';
+                    var body = 'GO GO GO!';
+                    var icon = 'Images/1.png';
+                  } else {
+                    var title = secondsLeft+' S';
+                    var body = title+'econds to go';
+                    var icon = 'Images/timer.png';
+                  }
                   registration.showNotification(title, {
                       body: body,
                       icon: icon,
