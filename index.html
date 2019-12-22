@@ -21,24 +21,37 @@
   <input class="form-control" id="startTime" value="17:30:00" type="time">
   <h1><label class="timer" id="Status">Countdown..</label></h1>
   <button type="button" class="btn btn-success" onclick="test()">Test Notifications</button>
+  <div class="form-check-inline">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input" id="sendNotifs" value="">Send Notifications
+    </label>
   </div>
-  <footer><div>Under construction</div>
+  </div>
+  <footer><p>Under construction</p>
     <p>Test notifications before the race, you may need to click Allow!</p>
     <p>If you have a smart-watch linked to your phone, opening this page using your phone will send notifications to your watch.</p>
-    <div>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div></footer>
+    <p>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p></footer>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
   <script>
-    navigator.serviceWorker.register('sw.js');
-    var finalCountDown = null;
-    var secondsLeft = 0;
-    var statusLabel = document.getElementById("Status");  
-    statusLabel.innerHTML = "Loading.";
+      var finalCountDown = null;
+      var secondsLeft = 0;
+      var statusLabel = document.getElementById("Status");  
+      statusLabel.innerHTML = "Loading.";
+      var startDateInput = document.getElementById("startDate");
+      var startTimeInput = document.getElementById("startTime");
 
-    var startDateInput = document.getElementById("startDate");
-    var startTimeInput = document.getElementById("startTime");
+      var d = new Date();
+      var dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
+   
+    $(document).ready(function(){
+      navigator.serviceWorker.register('sw.js');
+      $('#sendNotifs').prop('checked', navigator.serviceWorker.controller);     
 
-    var d = new Date();
-    var dateOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    startDateInput.value = d.toLocaleDateString('ja-JP', dateOptions).replace(/\//gi, '-');;
+      startDateInput.value = d.toLocaleDateString('ja-JP', dateOptions).replace(/\//gi, '-');
+
+    });
 
     
     function beep() {
@@ -88,6 +101,11 @@
 
       beep();
       console.log(secondsLeft);
+
+      if (!$('#sendNotifs').is(":checked"))
+      {
+        return;
+      }
 
       Notification.requestPermission(function(result) {
   
@@ -184,9 +202,7 @@
     requestAnimationFrame(doUpdate);
   </script> 
   
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
 </body>
 
 </html>
