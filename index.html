@@ -120,18 +120,17 @@
       }
 
 
-     self.addEventListener('push', event => {
+     /*self.addEventListener('push', event => {
        event.waitUntil(
          self.registration.showNotification('Title', {
-          body: 'Body.',
+          body: 'Body.'
          }).then(notificationEvent => {
            let notification = notificationEvent.notification;
            setTimeout(() => notification.close(), 2000);
           })
         );
-      });
+      });*/
 
-      return;
 
       Notification.requestPermission(function(result) {
         if (result === 'granted') {
@@ -141,8 +140,10 @@
               icon: icon
             }
 
-            var n = registration.showNotification(title, options)
-            setTimeout(n.close.bind(n), closeTime);
+            registration.showNotification(title, options).then(notificationEvent => {
+               let notification = notificationEvent.notification;
+               setTimeout(() => notification.close(), 2000);
+              })
           })
         } else {
           alert(result);
