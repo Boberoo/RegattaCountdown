@@ -78,6 +78,7 @@
       var title = secondsLeft+' S';
       var body = title+'econds to go';
       var icon = 'Images/timer.png';
+      var closeTime = 4000;
 
       if (secondsLeft < 0)
       {
@@ -89,7 +90,7 @@
         body = 'GO GO GO!';
         icon = 'Images/1.png';
       } else if (secondsLeft <= 10) {
-        //no change           
+        closeTime = 600;
       } else if (secondsLeft == 15) {
         //no change           
       } else if (secondsLeft == 30) {
@@ -97,13 +98,13 @@
       } else if (secondsLeft == 60) {
         //no change           
       } else if (secondsLeft == (60*4)) {
-        var title = '4 minutes';
-        var body = '4 minutes to go';
-        var icon = 'Images/4.png';
+        title = '4 minutes';
+        body = '4 minutes to go';
+        icon = 'Images/4.png';
       } else if (secondsLeft == (60*5)) {
-        var title = '5 minutes';
-        var body = '5 minutes to go';
-        var icon = 'Images/5.png';
+        title = '5 minutes';
+        body = '5 minutes to go';
+        icon = 'Images/5.png';
       } else
       {
         return; //do nothing in between
@@ -127,7 +128,7 @@
             }
 
            var n = new Notification(title,options);
-           setTimeout(n.close.bind(n), 4000);
+           setTimeout(n.close.bind(n), closeTime);
       })
       }
     });
