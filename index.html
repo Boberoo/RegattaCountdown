@@ -11,15 +11,15 @@
 
 </head>
 <body>
-  <div class="jumbotron">
+  <div class="jumbotron bg-dark text-white">
     <h1 class="display-4">Countdown</h1>
-    <p class="lead">Check the start time, you will be alerted at 5 minutes, 4 minutes, 1 minutes, 30 seconds, 15 seconds, then every 10 seconds for the last 10.</p>
+    <p class="lead">Set the start time. You will be alerted at 5 minutes, 4 minutes, 1 minute, 30 seconds, 15 seconds, then every second for the last 10 seconds.</p>
     <hr class="my-4">
     
   <label>Race Starts at:</label>
   <input class="form-control" id="startDate" type="date">
   <input class="form-control" id="startTime" value="17:30:00" type="time">
-  <h1><label class="timer" id="Status">Countdown..</label></h1>
+  <h1 class="display-1"><label class="timer" id="Status">Countdown..</label></h1>
   <button type="button" class="btn btn-success" onclick="test()">Test Notifications</button>
   <div class="form-check-inline">
     <label class="form-check-label">
@@ -27,10 +27,21 @@
     </label>
   </div>
   </div>
-  <footer><p>Under construction</p>
+  <footerall">
+    <div class="container-fluid text-center text-md-left">
+      <div class="row">
+        <div class="col-md-9 mt-md-0 mt-3">
+    <p>Under construction</p>
     <p>Test notifications before the race, you may need to click Allow!</p>
     <p>If you have a smart-watch linked to your phone, opening this page using your phone will send notifications to your watch.</p>
-    <p>Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></p></footer>
+  </div>
+  </div>
+</div>
+    <div class="footer-copyright text-center py-3">Created by <a href="https://twitter.com/mayaopperman">Maya Opperman</a>. Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      
+</footer>    
+
+
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
@@ -117,6 +128,7 @@
                       icon: icon,
                   }).then(notificationEvent => {
        let notification = notificationEvent.notification;
+       console.log(notification);
        setTimeout(() => notification.close(), 10*1000); //auto-hide after 10 seconds
     });
   
@@ -133,7 +145,10 @@
     function formatMins(m) {
       var mins = Math.floor(m);
       var secs = Math.floor((m % 1) * 60);
-      var result = "";
+      var hours = Math.trunc(mins / 60);
+      mins = mins % 60;
+
+      var result = hours+":";
      // if (mins > 0) 
         result += mins;
       if (secs > 9)
@@ -163,8 +178,8 @@
        //var secsTillStart = dateToSeconds(startDateTime) - dateToSeconds(n);
        var secsTillStart = (startDateTime.getTime() - n.getTime())/1000;
   
-      //statusLabel.innerHTML = formatMins(secsTillStart / 60);
-      statusLabel.innerHTML = secsTillStart+'<br/>'+formatMins(secsTillStart / 60);
+      statusLabel.innerHTML = formatMins(secsTillStart / 60);
+      //statusLabel.innerHTML = secsTillStart+'<br/>'+formatMins(secsTillStart / 60);
 
       if (finalCountDown == null) {
         if ((secsTillStart > 0) && (secsTillStart <= 65)) {
