@@ -119,23 +119,23 @@
       }
 
       Notification.requestPermission(function(result) {
-  
-          if (result === 'granted') {
-             navigator.serviceWorker.ready.then(function(registration) {
-                  
+        if (result === 'granted') {
+           navigator.serviceWorker.ready.then(function(registration) {
+             self.addEventListener('push', event => {
+                event.waitUntil(
                   registration.showNotification(title, {
                       body: body,
                       icon: icon,
                   }).then(notificationEvent => {
-       let notification = notificationEvent.notification;
-       console.log(notification);
-       setTimeout(() => notification.close(), 10*1000); //auto-hide after 10 seconds
+                      let notification = notificationEvent.notification;
+                      console.log(notification);
+                      setTimeout(() => notification.close(), 10*1000); //auto-hide after 10 seconds
+                    })
+           )
+                    })
+      })
+      }
     });
-  
-              });
-          }
-      });
-    }
 
  function test() {
   secondsLeft = 1;
