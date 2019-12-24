@@ -127,10 +127,13 @@
               icon: icon
             }
 
-           var n = new Notification(title,options);
-           setTimeout(n.close.bind(n), closeTime);
-      })
-      }
+            var n = new Notification(title,options);
+            setTimeout(n.close.bind(n), closeTime);
+          })
+        } else {
+          alert(result);
+        }
+
     });
   }
 
