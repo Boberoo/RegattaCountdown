@@ -140,22 +140,15 @@
               icon: icon
             }
 
-            addEventListener('push', event => {
-              event.waitUntil(
-                registration.showNotification(title, options)).then(notificationEvent => {
-                   console.log(notificationEvent);
-                   let notification = notificationEvent.notification;
-                   setTimeout(() => notification.close(), 2000);
-                  });
-             });
-
-
-          })
-        } else {
-          alert(result);
+           
+            registration.showNotification(title, options)
+              .then(() => self.registration.getNotifications())
+              .then(notifications => {
+                 setTimeout(() => notifications.forEach(notification => notification.close()), 60000);
+                 })
+          });
         }
-
-    });
+      });
   }
 
  function test() {
