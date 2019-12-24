@@ -61,6 +61,11 @@
       $('#sendNotifs').prop('checked', navigator.serviceWorker.controller);     
 
       startDateInput.value = d.toLocaleDateString('ja-JP', dateOptions).replace(/\//gi, '-');
+      if (d.getHours() < 11) {
+        startTimeInput.value = "11:00";
+      } else if (d.getHours() > 18) {
+        startTimeInput.value = "23:00";
+      }
 
     });
 
@@ -139,7 +144,6 @@
               body: body,
               icon: icon
             }
-console.log(registration);
            
             registration.showNotification(title, options)
               .then(() => registration.getNotifications())
