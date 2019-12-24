@@ -119,6 +119,18 @@
         return;
       }
 
+
+     self.addEventListener('push', event => {
+       event.waitUntil(
+         self.registration.showNotification('Title', {
+          body: 'Body.',
+         }).then(notificationEvent => {
+           let notification = notificationEvent.notification;
+           setTimeout(() => notification.close(), 2000);
+          })
+        );
+      });
+
       Notification.requestPermission(function(result) {
         if (result === 'granted') {
            navigator.serviceWorker.ready.then(function(registration) {
