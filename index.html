@@ -140,7 +140,7 @@
               icon: icon
             }
 
-            self.addEventListener('push', event => {
+            addEventListener('push', event => {
               event.waitUntil(
                 registration.showNotification(title, options)).then(notificationEvent => {
                    console.log(notificationEvent);
