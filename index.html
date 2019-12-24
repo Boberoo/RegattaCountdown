@@ -157,12 +157,17 @@ console.log(registration);
  }
   
     function formatMins(m) {
+      var result = "";
+      if (m < 0) {
+        m = (-1) * m;
+        result += "-";
+      }
       var mins = Math.floor(m);
       var secs = Math.floor((m % 1) * 60);
       var hours = Math.trunc(mins / 60);
       mins = mins % 60;
 
-      var result = hours+":";
+      result += hours+":";
      // if (mins > 0) 
         result += mins;
       if (secs > 9)
