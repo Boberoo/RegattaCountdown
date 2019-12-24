@@ -142,7 +142,7 @@
 console.log(options);
            
             registration.showNotification(title, options)
-              .then(() => self.registration.getNotifications())
+              .then(() => registration.getNotifications())
               .then(notifications => {
                  setTimeout(() => notifications.forEach(notification => notification.close()), 60000);
                  })
