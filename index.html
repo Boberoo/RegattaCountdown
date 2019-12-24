@@ -144,7 +144,7 @@ console.log(registration);
             registration.showNotification(title, options)
               .then(() => registration.getNotifications())
               .then(notifications => {
-                 setTimeout(() => notifications.forEach(notification => notification.close()), 60000);
+                 setTimeout(() => notifications.forEach(notification => notification.close()), closeTime);
                  })
           });
         }
