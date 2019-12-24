@@ -141,6 +141,7 @@
             }
 
             registration.showNotification(title, options).then(notificationEvent => {
+               console.log(notificationEvent);
                let notification = notificationEvent.notification;
                setTimeout(() => notification.close(), 2000);
               })
