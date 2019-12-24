@@ -121,15 +121,15 @@
 
       Notification.requestPermission(function(result) {
         if (result === 'granted') {
-           //navigator.serviceWorker.ready.then(function(registration) {
+           navigator.serviceWorker.ready.then(function(registration) {
             var options = {
               body: body,
               icon: icon
             }
 
-            var n = new Notification(title,options);
+            var n = registration.showNotification(title, options)
             setTimeout(n.close.bind(n), closeTime);
-          //})
+          })
         } else {
           alert(result);
         }
